@@ -16,6 +16,10 @@ dependencies {
 
 ```
 private fun createDialog(): XDialog {
+    
+
+    //begin 
+
     return XDialog.Builder(this)
         .setLayoutRes(R.layout.dialog_demo_layout)
         .setCancelable(true)
@@ -34,6 +38,8 @@ private fun createDialog(): XDialog {
                 dialog.hide()
             })
         .show()
+    
+    //end
 }
 ```
 
@@ -64,7 +70,7 @@ private fun createDialog(): XDialog {
         android:layout_marginTop="30dp"
         android:layout_marginBottom="20dp"
         android:padding="20dp"
-        android:text="确定"
+        android:text="Sure"
         android:textColor="@android:color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
