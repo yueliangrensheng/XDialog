@@ -6,6 +6,7 @@ import android.view.Gravity
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.yazao.dialog.demo.R
 
 class MainActivity : AppCompatActivity() {
 
