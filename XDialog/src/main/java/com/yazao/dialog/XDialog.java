@@ -202,11 +202,11 @@ public class XDialog extends Dialog {
             return this;
         }
 
-        private XDialog create() {
-            return create(true);
+        public XDialog build() {
+            return build(true);
         }
 
-        private XDialog create(boolean isForceCreateDialog) {
+        public XDialog build(boolean isForceCreateDialog) {
 
             //设置默认 值
             if (gravity == Gravity.BOTTOM && resId == 0) {
@@ -234,8 +234,9 @@ public class XDialog extends Dialog {
 
 
         public XDialog show() {
-            XDialog dialog = create(false);
-            dialog.show();
+            if (dialog != null && !dialog.isShowing()) {
+                dialog.show();
+            }
             return dialog;
         }
 
