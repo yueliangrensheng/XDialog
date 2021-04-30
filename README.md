@@ -1,7 +1,7 @@
 # XDialog
 > Android Dialog组件
 
-# how to use
+## how to use
 
 1. app/build.gradle 配置如下：
 ```

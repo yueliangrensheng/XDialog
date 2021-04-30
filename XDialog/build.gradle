@@ -1,5 +1,10 @@
 apply plugin: 'com.android.library'
 
+//---------------------------------- sonatype maven center start -------------------------------
+//这里是上传到 Sonatype 的 MavenCenter仓库中
+apply from: "${rootProject.projectDir}/build_mavencentral.gradle"
+//---------------------------------- sonatype maven center end -------------------------------
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.0"
@@ -11,6 +16,11 @@ android {
         versionName "1.0"
 
         consumerProguardFiles "consumer-rules.pro"
+    }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
     }
 
     buildTypes {
