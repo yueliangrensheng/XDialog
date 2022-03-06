@@ -8,6 +8,6 @@ import android.view.View;
  * Author : yueliangrensheng
  * Date : 2020/8/19
  */
-interface OnDialogClickListener {
+public interface OnDialogClickListener {
     void onClick(Dialog dialog, View view);
 }

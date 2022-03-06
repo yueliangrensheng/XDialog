@@ -81,6 +81,19 @@ public class XDialog extends Dialog {
             return this;
         }
 
+        public Builder setRootView(View rootView){
+            if (rootView == null){
+                return this;
+            }
+
+            if (rootView.getParent() != null){
+                ((ViewGroup)rootView.getParent()).removeView(rootView);
+            }
+
+            mLayoutView = rootView;
+            return this;
+        }
+
         public Builder setCancelable(boolean flag) {
             cancelable = flag;
             return this;
