@@ -19,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 
+import java.lang.ref.WeakReference;
+
 /**
  * 类描述：
  *
@@ -62,7 +64,8 @@ public class XDialog extends Dialog {
         private XDialog dialog;
         private View mLayoutView;
         private SparseArray<View> mViews = new SparseArray<>();
-        Context mContext;
+        //        Context mContext;
+        WeakReference<Context> contextWeakReference;
         boolean cancelable = true;
         boolean canceledOnTouchOutside = true;
         private int gravity = Gravity.CENTER;//Dialog 显示布局 Gravity
@@ -73,21 +76,29 @@ public class XDialog extends Dialog {
 
 
         public Builder(Context context) {
-            mContext = context;
+//            mContext = context;
+            if (contextWeakReference != null) {
+                contextWeakReference.clear();
+                contextWeakReference = null;
+            }
+            if (mViews != null) {
+                mViews.clear();
+            }
+            contextWeakReference = new WeakReference<Context>(context);
         }
 
         public Builder setLayoutRes(@LayoutRes int layoutRes) {
-            mLayoutView = LayoutInflater.from(mContext).inflate(layoutRes, null, false);
+            mLayoutView = LayoutInflater.from(contextWeakReference.get()).inflate(layoutRes, null, false);
             return this;
         }
 
-        public Builder setRootView(View rootView){
-            if (rootView == null){
+        public Builder setRootView(View rootView) {
+            if (rootView == null) {
                 return this;
             }
 
-            if (rootView.getParent() != null){
-                ((ViewGroup)rootView.getParent()).removeView(rootView);
+            if (rootView.getParent() != null) {
+                ((ViewGroup) rootView.getParent()).removeView(rootView);
             }
 
             mLayoutView = rootView;
@@ -227,10 +238,10 @@ public class XDialog extends Dialog {
             }
 
             if (isForceCreateDialog) {
-                dialog = new XDialog(mContext, resId, width, height);
+                dialog = new XDialog(contextWeakReference.get(), resId, width, height);
             } else {
                 if (dialog == null) {
-                    dialog = new XDialog(mContext, resId, width, height);
+                    dialog = new XDialog(contextWeakReference.get(), resId, width, height);
                 }
             }
 
